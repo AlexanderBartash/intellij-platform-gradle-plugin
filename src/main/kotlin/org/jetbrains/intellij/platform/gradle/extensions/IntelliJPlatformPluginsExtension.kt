@@ -21,6 +21,7 @@ import org.jetbrains.intellij.platform.gradle.Constants.Extensions
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatform
 import org.jetbrains.intellij.platform.gradle.plugins.configureExtension
 import org.jetbrains.intellij.platform.gradle.utils.rootProjectPath
+import org.jetbrains.intellij.platform.gradle.utils.settings
 import java.io.File
 import java.nio.file.Path
 import javax.inject.Inject
@@ -34,6 +35,7 @@ import javax.inject.Inject
 @IntelliJPlatform
 abstract class IntelliJPlatformPluginsExtension @Inject constructor(
     repositories: RepositoryHandler,
+    settingsRepositories: RepositoryHandler,
     configurations: ConfigurationContainer,
     dependencies: DependencyHandler,
     layout: ProjectLayout,
@@ -48,6 +50,7 @@ abstract class IntelliJPlatformPluginsExtension @Inject constructor(
 
     private val delegate = IntelliJPlatformDependenciesHelper(
         repositories,
+        settingsRepositories,
         configurations,
         dependencies,
         layout,
@@ -246,6 +249,7 @@ abstract class IntelliJPlatformPluginsExtension @Inject constructor(
             target.configureExtension<IntelliJPlatformPluginsExtension>(
                 Extensions.PLUGINS,
                 project.repositories,
+                project.settings.dependencyResolutionManagement.repositories,
                 project.configurations,
                 project.dependencies,
                 project.layout,

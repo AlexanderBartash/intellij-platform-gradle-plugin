@@ -133,7 +133,7 @@ internal fun Path.toBundledIvyArtifactsRelativeTo(basePath: Path) = explodeIntoI
  * For local plugins, we don't use relative paths.
  * Since a base path is null, the result will be an absolute path.
  *
- * @see IntelliJPlatformRepositoriesHelper.createLocalIvyRepository
+ * @see IntelliJPlatformRepositoriesHelper.localPlatformArtifactsRepository
  */
 internal fun Path.toAbsolutePathLocalPluginIvyArtifacts() = explodeIntoIvyJarsArtifactsRelativeTo(null)
 

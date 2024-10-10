@@ -60,6 +60,7 @@ object Constants {
 
     object Repositories {
         const val LOCAL_INTELLI_J_PLATFORM_ARTIFACTS = "Local IntelliJ Platform Artifacts Repository"
+        const val LOCAL_INTELLI_J_PLATFORM_BUNDLED_ARTIFACTS = "Local IntelliJ Platform Bundled Artifacts Repository"
         const val INTELLI_J_PLATFORM_CUSTOM_PLUGIN = "IntelliJ Platform Custom Plugin Repository"
         const val JET_BRAINS_MARKETPLACE = "JetBrains Marketplace Repository"
         const val INTELLI_J_PLATFORM_DEPENDENCIES = "IntelliJ Platform Dependencies Repository"

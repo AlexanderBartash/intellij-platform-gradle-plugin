@@ -769,6 +769,7 @@ abstract class IntelliJPlatformExtension @Inject constructor(
         @IntelliJPlatform
         abstract class Ides @Inject constructor(
             repositories: RepositoryHandler,
+            settingsRepositories: RepositoryHandler,
             configurations: ConfigurationContainer,
             dependencies: DependencyHandler,
             layout: ProjectLayout,
@@ -781,6 +782,7 @@ abstract class IntelliJPlatformExtension @Inject constructor(
 
             private val delegate = IntelliJPlatformDependenciesHelper(
                 repositories,
+                settingsRepositories,
                 configurations,
                 dependencies,
                 layout,
@@ -954,6 +956,7 @@ abstract class IntelliJPlatformExtension @Inject constructor(
                     target.configureExtension<Ides>(
                         Extensions.IDES,
                         project.repositories,
+                        project.settings.dependencyResolutionManagement.repositories,
                         project.configurations,
                         project.dependencies,
                         project.layout,

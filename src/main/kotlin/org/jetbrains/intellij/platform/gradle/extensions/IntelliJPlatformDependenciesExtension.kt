@@ -26,6 +26,7 @@ import org.jetbrains.intellij.platform.gradle.plugins.configureExtension
 import org.jetbrains.intellij.platform.gradle.tasks.ComposedJarTask
 import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
 import org.jetbrains.intellij.platform.gradle.toIntelliJPlatformType
+import org.jetbrains.intellij.platform.gradle.utils.settings
 import java.io.File
 import java.nio.file.Path
 import javax.inject.Inject
@@ -53,6 +54,7 @@ import kotlin.io.path.absolute
 @IntelliJPlatform
 abstract class IntelliJPlatformDependenciesExtension @Inject constructor(
     repositories: RepositoryHandler,
+    settingsRepositories: RepositoryHandler,
     configurations: ConfigurationContainer,
     dependencies: DependencyHandler,
     layout: ProjectLayout,
@@ -62,7 +64,7 @@ abstract class IntelliJPlatformDependenciesExtension @Inject constructor(
     rootProjectDirectory: Path,
 ) {
 
-    private val delegate = IntelliJPlatformDependenciesHelper(repositories, configurations, dependencies, layout, objects, providers, resources, rootProjectDirectory)
+    private val delegate = IntelliJPlatformDependenciesHelper(repositories, settingsRepositories, configurations, dependencies, layout, objects, providers, resources, rootProjectDirectory)
 
     /**
      * Adds a dependency on the IntelliJ Platform.
@@ -1312,6 +1314,7 @@ abstract class IntelliJPlatformDependenciesExtension @Inject constructor(
             target.configureExtension<IntelliJPlatformDependenciesExtension>(
                 Extensions.INTELLIJ_PLATFORM,
                 project.repositories,
+                project.settings.dependencyResolutionManagement.repositories,
                 project.configurations,
                 project.dependencies,
                 project.layout,

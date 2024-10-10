@@ -212,8 +212,19 @@ abstract class IntelliJPlatformRepositoriesExtension @Inject constructor(
      * @param action The action to be performed on the repository. Defaults to an empty action.
      */
     @JvmOverloads
-    fun localPlatformArtifacts(action: IvyRepositoryAction = {}) = delegate.createLocalIvyRepository(
+    fun localPlatformArtifacts(action: IvyRepositoryAction = {}) = delegate.localPlatformArtifactsRepository(
         repositoryName = Constants.Repositories.LOCAL_INTELLI_J_PLATFORM_ARTIFACTS,
+        action = action,
+    )
+
+    /**
+     * TODO
+     *
+     * @param action The action to be performed on the repository. Defaults to an empty action.
+     */
+    @JvmOverloads
+    fun localPlatformBundledArtifacts(action: IvyRepositoryAction = {}) = delegate.localPlatformBundledArtifacts(
+        repositoryName = Constants.Repositories.LOCAL_INTELLI_J_PLATFORM_BUNDLED_ARTIFACTS,
         action = action,
     )
 
@@ -229,6 +240,7 @@ abstract class IntelliJPlatformRepositoriesExtension @Inject constructor(
     fun defaultRepositories() {
         // Try local first, because it should be the fastest.
         localPlatformArtifacts()
+        localPlatformBundledArtifacts()
         jetbrainsIdeInstallers()
         androidStudioInstallers()
         releases()

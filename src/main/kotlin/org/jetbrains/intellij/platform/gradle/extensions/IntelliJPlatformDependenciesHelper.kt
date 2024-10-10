@@ -14,6 +14,7 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.api.file.Directory
 import org.gradle.api.file.ProjectLayout
+import org.gradle.api.invocation.Gradle
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Provider
 import org.gradle.api.provider.ProviderFactory
@@ -60,6 +61,7 @@ import kotlin.io.path.*
  */
 class IntelliJPlatformDependenciesHelper(
     private val repositories: RepositoryHandler,
+    private val settingsRepositories: RepositoryHandler,
     private val configurations: ConfigurationContainer,
     private val dependencies: DependencyHandler,
     private val layout: ProjectLayout,
@@ -365,6 +367,8 @@ class IntelliJPlatformDependenciesHelper(
             else -> artifactLocationPath.resolve(IVY_FILES_DIRECTORY)
         }.absolute().normalize()
 
+        //gradle.sett
+
         /**
          * It would be better to make it [IntelliJPlatformRepositoriesHelper.createExclusiveIvyRepository].
          * However, since we're creating it lazily, by this time some already registered repositories could have been "used".
@@ -372,8 +376,8 @@ class IntelliJPlatformDependenciesHelper(
          * To make it exclusive, it should be created with empty artifact anv Ivy paths in [IntelliJPlatformRepositoriesExtension.defaultRepositories]
          * then the paths should be updated here once they're known.
          */
-        IntelliJPlatformRepositoriesHelper.createDynamicBundledIvyArtifactsRepository(
-            repositories, ivyLocationPath, artifactLocationPath
+        IntelliJPlatformRepositoriesHelper.updateDynamicBundledIvyArtifactsRepository(
+            repositories, settingsRepositories, ivyLocationPath, artifactLocationPath
         )
     }
 
