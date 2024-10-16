@@ -18,6 +18,7 @@
 - Fixed `Could not generate a decorated class for type PluginArtifactRepository.` when creating a custom plugin repository.
 - Fixed issue #1779 about compatibility with Gradle dependency verification. Previously it was failing with "Failed to create MD5 hash for file".
 - #1799: Gradle's api & compileOnlyApi configurations created by its java-library plugin do not work, and transitive implementation scope dependencies get exposed, when this plugin is used.
+- #1791: Fixed incorrect transitive dependencies calculation for bundled modules. 
 
 ## [2.1.0]
 
