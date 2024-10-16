@@ -6,7 +6,7 @@ import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.initialization.resolve.RulesMode
-import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.plugins.JavaLibraryPlugin
 import org.gradle.kotlin.dsl.all
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.get
@@ -47,7 +47,10 @@ abstract class IntelliJPlatformBasePlugin : Plugin<Project> {
         checkGradleVersion()
 
         with(project.plugins) {
-            apply(JavaPlugin::class)
+            // https://docs.gradle.org/current/userguide/java_plugin.html
+            // https://docs.gradle.org/current/userguide/java_library_plugin.html
+            apply(JavaLibraryPlugin::class)
+            // https://docs.gradle.org/current/userguide/idea_plugin.html
             apply(IdeaPlugin::class)
         }
 
